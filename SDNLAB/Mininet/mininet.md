@@ -47,5 +47,39 @@ git clone git://github.com/mininet/mininet
 
 #3. 安装mininet
 ./install -n3V 2.5.0  #安装ovs2.5
+./install -a          #全部安装
+```
 
+# Mininet命令
+
+测试安装是否完成
+```
+sudo mn --test pingall      #显示Cleanup complete.
+```
+启动mininet
+```
+mn
+```
+常用交互命令
+```
+#nodes              查看全部节点 
+#net                查看链路信息 
+#dump               输出各节点的信息 
+#h1 ping -c 4 h2    测试主机之间的连通性 
+#iperf              两个节点之间用指定简单的 TCP 测试 
+#iperfudp           两个节点之间用指定款单 udp 进行测试 
+#noecho             运行交互窗口，关闭回应 
+#pingpair           两个主机将互 ping 
+#help               列出命令文档，查看命令帮助： help command 
+#dpctl              流表类操作 
+#exit/quit          退出 mininet 命令行 
+#hX ifconfig        查看当前那主机的 ip 地址，如： h1 ifconfig 
+#py/sh              执行 python 表达式或运行外部 shell 程序 
+```
+python添加节点
+```
+py net.addHost('h3')
+py net.addLink(s1,net.get('h3'))
+py s1.attach('s1-eth3')
+py net.get('h3').cmd('ifconfig h3-eth0 10.0.0.3')
 ```
