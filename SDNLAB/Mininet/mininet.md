@@ -83,3 +83,35 @@ py net.addLink(s1,net.get('h3'))
 py s1.attach('s1-eth3')
 py net.get('h3').cmd('ifconfig h3-eth0 10.0.0.3')
 ```
+
+# Mininet实战1————流表
+>本实验的拓扑结构
+
+```
+sudo mn --custom exper1.py --topo mytopo --controller=remote,ip=127.0.0.1,port=6653
+```
+常用命令(对所有的流表执行操作)
+```
+#查看
+dpctl dump-flows
+#删除
+ddpctl del-flows
+
+```
+
+当控制器不存在时，手动添加流表
+```
+#添加流表，使得进入端口为1的，向端口2输出
+dpctl add-flow in_port=1,actions=output:2
+#添加流表，使得进入端口为2的，向端口1输出
+dpctl add-flow in_port=2,actions=output:1
+```
+解释：用dpctl对交换机添加flow，让交换机从s1-eth1这个端口接收到的所有traffic都从s1-eth2这个端口发出去。用dpctl给交换机添加双向流表，因为ping包除了echo request还有echo reply。所以还需要用dpctl对交换机添加flow，让交换机从s1-eth2这个端口接收到的所有traffic都从s1-eth1这个端口发出去。添加这两条flow后，h1能够ping通h2。
+
+
+```
+dpctl add-flow dl_type=0x0800,nw_dst=10.0.0.2,actions=output:2
+dpctl add-flow dl_type=0x0800,nw_dst=10.0.0.1,actions=output:1
+dpctl dump-flows
+dpctl add-flow dl_type=0x0806,actions=NORMAL
+```
