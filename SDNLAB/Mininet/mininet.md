@@ -88,10 +88,11 @@ py net.get('h3').cmd('ifconfig h3-eth0 10.0.0.3')
 >本实验的拓扑结构  
 
 ![拓扑图](./flow_topo.png)
-
+[实验1拓扑代码](./exper1.py) 
 ```
 sudo mn --custom exper1.py --topo mytopo --controller=remote,ip=127.0.0.1,port=6653
 ```
+ 
 常用命令(对所有的流表执行操作)
 ```
 #查看
@@ -132,4 +133,13 @@ dpctl dump-flows
 >执行命令dpctl add-flow dl_type=0x0806,actions=NORMAL添加ARP（0x0806）协议相关的流表，让交换机以NORMAL形式（即广播）将所有ARP包从各个端口广播出去。
 ```
 dpctl add-flow dl_type=0x0806,actions=NORMAL
+#成功
 ```
+
+#   Mininet实战2———模拟多数据中心流量带宽实验
+
+##  案例目的
++   通过Mininet模拟搭建基于不同数据中心的网络拓扑
++   掌握多数据中心网络拓扑的构建
++   熟悉网络性能测试工具iperf，根据实验测试SDN网络性能
++   通过程序生成真实网络流量
