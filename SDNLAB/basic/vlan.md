@@ -42,8 +42,9 @@ VLAN(Virtual Local Area Network),即虚拟局域网。
 ##  VLAN的接口类型和VLAN标签的处理机制
 现网中属于同一个VLAN的用户可能会被连接在不同的交换机上，且跨越交换机的VLAN可能不止一个，如果需要用户间的互通，就需要交换机间的接口能够同时识别和发送多个VLAN的数据帧。根据接口连接对象以及对收发数据帧处理的不同，当前有VLAN的多种接口类型，以适应不同的连接和组网。
 
-不同厂商对VLAN接口类型的定义可能不同。对于华为设备来说，常见的VLAN接口类型有三种，包括：Access、Trunk和Hybrid。
-
+不同厂商对VLAN接口类型的定义可能不同。对于华为设备来说，常见的VLAN接口类型有三种，包括：Access、Trunk和Hybrid。  
+<br/>
+![](https://forum.huawei.com/enterprise/zh/data/attachment/forum/dm/ecommunity/uploads/2014/0605/17/539033ee39105.png)  <br/><br/>
 ### **Access接口**
 Access接口一般用于和不能识别Tag的用户终端（如用户主机、服务器）相连，或者不需要区分不同VLAN成员时使用。
 
