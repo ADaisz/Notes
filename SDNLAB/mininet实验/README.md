@@ -1,4 +1,4 @@
-### mininet 测试
+### 1.mininet 测试
 1.  loss
 
 ```
@@ -40,7 +40,7 @@ mininet> h1 ping -c 10 h2
 ```
 
 
-### iperf 绘图
+### 2.iperf 绘图
 
 下载绘图工具
 ```
@@ -88,7 +88,7 @@ gnuplot>replot
 结果
 ![](./iperf_plot/a.gif)
 
-### mininet Script
+### 3.mininet Script
 
 前三个简单的直接跳过
 
@@ -135,7 +135,7 @@ ip route add default via 192.168.1.254
 
 
 
-### Bridge
+### 4.Bridge
 
 安装bridge相关包
 ```
@@ -159,7 +159,7 @@ sudo apt install bridge-utils
 ![](./bridge/br3.png)
 
 
-### VLAN + bridge
+### 5.VLAN + bridge
 
 安装vlan
 ```
@@ -169,7 +169,7 @@ sudo apt install vlan
 
 ![](./vlan/br4.png)
 
-### OVS
+### 6.OVS
 
 1.  controller 消失
 
@@ -211,10 +211,10 @@ mininet>h1 ping h2 -c 3
 #原因:arp请求和arp单播回复
 ```
 
-![n_apckets=5](./OVS/dump_flows.png)
+![n_packets=5](./OVS/dump_flows.png)
 
 
-### SSH
+### 7.SSH
 
 1.  构造拓扑
 
@@ -239,9 +239,67 @@ h2# netstat -tunlp |grep 22
 h1# ssh user@10.0.0.2
 ```
 
-### Containernet
+### 8.Containernet
 
-### ReverseProxy    --frp
+1.  下载源码
+```
+git clone https://github.com/containernet/containernet.git
+```
+
+2. 安装 containernet
+
+```
+#python包依赖
+pip3 install docker
+
+##安装
+python3 ./setup.py install
+```
+
+3.  安装docker
+
+[reference](https://www.runoob.com/docker/ubuntu-docker-install.html)
+
+4.  docker启动
+
+```
+#
+docker pull ubuntu:16.04
+docker images
+
+docker run -it ubuntu:16.04 bash
+
+```
+
+```
+root node#apt install openssh-server -y
+root node#apt install net-tools
+root node#apt install iputils-ping
+root node#adduser user
+
+##为创建两个images,设置不同的密码
+root node#passwd
+```
+```
+##构建两个镜像
+docker commit 96c71559ced5 ubuntu:sshd1
+docker commit 96c71559ced5 ubuntu:sshd2
+```
+
+containernet目录下执行 python3 1.py  
+
+[构建拓扑](./Containernet/1.py)
+
+```
+1.d1 d2 内 IP地址需要检查
+2.设置ssh服务打开
+/etc/init.d/ssh start
+
+netstat -tunlp |grep 22
+```
+
+
+### 9.ReverseProxy    --frp
 
 1.  go语言环境安装
 
@@ -371,9 +429,9 @@ frps.ini frpc.ini 可以提前修改
 ```
 
 
-### SSHTunnel
+### 10.SSHTunnel
 
-### OVS_operate
+### 11.OVS_operate
 
 1.  lab1
 
